@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Website</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    overflow-x:hidden;
+}
+
+/* LOGIN PAGE */
+#loginPage{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    background:linear-gradient(to bottom,#0d6efd,#4da3ff);
+}
+
+.login-box{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.login-box input{
+    display:block;
+    width:220px;
+    margin:15px auto;
+    padding:10px;
+}
+
+.login-box button{
+    padding:10px 25px;
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* MAIN + LETTER PAGE */
+#mainPage,#letterPage{
+    display:none;
+    min-height:100vh;
+    background:linear-gradient(to bottom,#ff9ecf,#ff66b2);
+    text-align:center;
+    padding-top:60px;
+    position:relative;
+}
+
+h1{color:white;}
+
+.box{
+    margin:20px auto;
+    padding:20px;
+    width:90%;
+    max-width:500px;
+    background:white;
+    border-radius:20px;
+    font-weight:bold;
+    color:#ff1493;
+}
+
+/* TOP MESSAGE */
+#loveMessage{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#ff1493;
+    color:white;
+    padding:10px;
+    display:none;
+    animation:fade 1s ease-in-out;
+}
+
+@keyframes fade{
+    0%{opacity:0;}
+    50%{opacity:1;}
+    100%{opacity:0;}
+}
+
+/* VIDEO */
+.video-container{
+    margin-top:30px;
+    width:90%;
+    max-width:400px;
+    margin:auto;
+}
+
+video{
+    width:100%;
+    border-radius:20px;
+    display:none;
+}
+
+.play-button{
+    width:100px;
+    height:100px;
+    background:#ff1493;
+    color:white;
+    font-size:40px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:auto;
+    cursor:pointer;
+}
+
+#continueBtn{
+    display:none;
+    margin-top:20px;
+    padding:10px 25px;
+    background:white;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* LETTER PAGE */
+.mail{
+    font-size:80px;
+    cursor:pointer;
+    margin-top:40px;
+}
+
+.paper{
+    display:none;
+    margin:20px auto;
+    padding:30px;
+    width:90%;
+    max-width:400px;
+    background:white;
+    border-radius:15px;
+    font-weight:bold;
+    color:#ff1493;
+    transform:scale(0);
+    transition:0.5s ease;
+}
+
+.paper.show{
+    transform:scale(1);
+}
+
+/* PHOTO */
+.love-photo{
+    display:none;
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:20px;
+    margin:25px auto;
+    opacity:0;
+    transition:1s ease;
+}
+
+.love-photo.show{
+    display:block;
+    opacity:1;
+}
+
+.love-photo.zoom{
+    transform:scale(1.1);
+    box-shadow:0 0 40px #ff1493;
+}
+
+/* HEART BURST */
+.heart-burst{
+    position:fixed;
+    font-size:22px;
+    animation:floatUp 2s linear forwards;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-100px);opacity:0;}
+}
+
+/* PETALS */
+.petal{
+    position:fixed;
+    top:-10px;
+    font-size:20px;
+    animation:fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+    <div class="login-box">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+</div>
+
+<!-- MAIN PAGE -->
+<div id="mainPage">
+    <div id="loveMessage">ilysm💖</div>
+    <h1>MADE BY MUNI</h1>
+
+    <div class="box">
+        THANKS JANIEE FOR HAPPY MEMORIES 💖
+    </div>
+
+    <div class="video-container">
+        <div class="play-button" onclick="startVideo()">▶</div>
+        <video id="loveVideo">
+            <source src="lv_7595695335465340213_20260121205826.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <button id="continueBtn" onclick="openLetterPage()">Continue</button>
+</div>
+
+<!-- LETTER PAGE -->
+<div id="letterPage">
+    <div class="mail" onclick="openPaper()">💌</div>
+    <p style="color:white;">Tap to open it</p>
+
+    <div class="paper" id="paper"></div>
+
+    <!-- YOUR PHOTO BELOW PAPER -->
+    <img src="Snapchat-1966808050.jpg" class="love-photo">
+
+    <audio id="loveSong" loop>
+        <source src="ssstik.io_1770852949580.mp3" type="audio/mp3">
+    </audio>
+</div>
+
+<script>
+
+/* LOGIN */
+function login(){
+    if(username.value==="janan" && password.value==="muni"){
+        loginPage.style.display="none";
+        mainPage.style.display="block";
+
+        loveMessage.style.display="block";
+        setTimeout(()=>{loveMessage.style.display="none"},1000);
+    }
+}
+
+/* VIDEO */
+function startVideo(){
+    document.querySelector(".play-button").style.display="none";
+    let video=document.getElementById("loveVideo");
+    video.style.display="block";
+    video.setAttribute("controls","true");
+    video.play();
+
+    video.onended=function(){
+        continueBtn.style.display="inline-block";
+    }
+}
+
+/* OPEN LETTER PAGE */
+function openLetterPage(){
+    mainPage.style.display="none";
+    letterPage.style.display="block";
+
+    let song=document.getElementById("loveSong");
+    song.volume=0;
+    song.play();
+
+    let fade=setInterval(()=>{
+        if(song.volume<1){
+            song.volume+=0.05;
+        }else{
+            clearInterval(fade);
+        }
+    },200);
+
+    setInterval(()=>{
+        let petal=document.createElement("div");
+        petal.classList.add("petal");
+        petal.innerHTML="🌸";
+        petal.style.left=Math.random()*100+"vw";
+        petal.style.animationDuration=(3+Math.random()*2)+"s";
+        document.body.appendChild(petal);
+        setTimeout(()=>petal.remove(),5000);
+    },300);
+}
+
+/* OPEN PAPER */
+function openPaper(){
+    let paper=document.getElementById("paper");
+    let photo=document.querySelector(".love-photo");
+
+    paper.classList.add("show");
+    paper.style.display="block";
+
+    // SHOW PHOTO BEFORE TEXT
+    photo.classList.add("show");
+
+    let text="I FEEL SAFE AROUND YOU ❤️..PATA NAHI KIU PAR 💖";
+    let i=0;
+    paper.innerHTML="";
+
+    let typing=setInterval(()=>{
+        if(i<text.length){
+            paper.innerHTML+=text.charAt(i);
+            i++;
+        }else{
+            clearInterval(typing);
+
+            // AFTER TEXT
+            photo.classList.add("zoom");
+
+            for(let j=0;j<10;j++){
+                let heart=document.createElement("div");
+                heart.classList.add("heart-burst");
+                heart.innerHTML="💖";
+                heart.style.left=Math.random()*100+"vw";
+                heart.style.top="60%";
+                document.body.appendChild(heart);
+                setTimeout(()=>heart.remove(),2000);
+            }
+        }
+    },50);
+}
+
+</script>
+</body>
+</html>
